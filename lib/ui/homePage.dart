@@ -3,6 +3,7 @@ import '../helpers/db.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'contactPage.dart';
+import 'drawerLateral.dart';
 
 enum OrderOptions { orderaz, orderza }
 
@@ -242,7 +243,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contacts"),
+        title: Text("Contatos"),
         backgroundColor: Colors.red,
         centerTitle: true,
         actions: <Widget>[
@@ -269,6 +270,7 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add),
         backgroundColor: Colors.red,
       ),
+      drawer: DrawerLateral(),
       body: ListView.builder(
           padding: EdgeInsets.all(10.0),
           itemCount: contacts.length,
