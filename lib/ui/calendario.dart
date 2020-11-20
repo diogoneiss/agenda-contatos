@@ -6,20 +6,31 @@ class CalendarioAniversarios extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Próximos aniversários"),
-          backgroundColor: Colors.red,
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: Text("Próximos aniversários"),
+        backgroundColor: Colors.red,
+      ),
+      body: ListView(
           children: [
-            ComponenteCalendario(),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Voltar'),
+            Column(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    ComponenteCalendario(),
+
+                  ],
+                ),
+
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Voltar'),
+                ),
+              ],
             ),
-          ],
-        ));
+          ]),
+    );
   }
 }
