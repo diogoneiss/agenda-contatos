@@ -10,19 +10,15 @@ class CalendarioAniversarios extends StatelessWidget {
         title: Text("Próximos aniversários"),
         backgroundColor: Colors.red,
       ),
-      body: ListView(
-          children: [
-            Column(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    ComponenteCalendario(),
-
-                  ],
-                ),
-
-                ElevatedButton(
+      body: Column(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              ComponenteCalendario(),
+            ],
+          ),
+          ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -30,7 +26,7 @@ class CalendarioAniversarios extends StatelessWidget {
                 ),
               ],
             ),
-          ]),
+
     );
   }
 }

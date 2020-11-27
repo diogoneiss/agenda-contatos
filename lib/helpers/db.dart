@@ -1,5 +1,5 @@
 import 'dart:async';
-
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -55,6 +55,8 @@ class ContactHelper {
 
   Future<Contact> getContact(int id) async {
     Database dbContact = await db;
+    //FirebaseFirestore dbFb = FirebaseFirestore.instance;
+    //var snapshots = await dbFb.collection("contatos").where('Ativo', isEqualTo: true).get();
     List<Map> maps = await dbContact.query(contactTable,
         columns: [
           idColumn,

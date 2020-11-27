@@ -2,9 +2,176 @@
 //  Licensed under Apache License v2.0
 
 import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+class MyCalendar extends StatefulWidget {
+  @override
+  _MyCalendarState createState() => _MyCalendarState();
+}
+
+class _MyCalendarState extends State<MyCalendar> {
+  CalendarController _controller;
+
+  TextStyle dayStyle(FontWeight fontWeight) {
+    return TextStyle(color: Color(0xff30384c), fontWeight: fontWeight);
+  }
+
+  Container taskList(
+      String title, String description, IconData iconImg, Color iconColor) {
+    return Container(
+      padding: EdgeInsets.only(top: 20),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            iconImg,
+            color: iconColor,
+            size: 30,
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(title,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(description,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal,
+                    )),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = CalendarController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 30,
+              ),
+              TableCalendar(
+                startingDayOfWeek: StartingDayOfWeek.monday,
+                calendarStyle: CalendarStyle(
+                  weekdayStyle: dayStyle(FontWeight.normal),
+                  weekendStyle: dayStyle(FontWeight.normal),
+                  selectedColor: Color(0xff30374b),
+                  todayColor: Color(0xff30374b),
+                ),
+                daysOfWeekStyle: DaysOfWeekStyle(
+                  weekdayStyle: TextStyle(
+                      color: Color(0xff30384c),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                  weekendStyle: TextStyle(
+                      color: Color(0xff30384c),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+                headerStyle: HeaderStyle(
+                  formatButtonVisible: false,
+                  titleTextStyle: TextStyle(
+                    color: Color(0xff30384c),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  leftChevronIcon: Icon(
+                    Icons.chevron_left,
+                    color: Color(0xff30384c),
+                  ),
+                  rightChevronIcon: Icon(
+                    Icons.chevron_right,
+                    color: Color(0xff30384c),
+                  ),
+                ),
+                calendarController: _controller,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 30),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.55,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular((50)),
+                      topRight: Radius.circular((50)),
+                    ),
+                    color: Color(0xff30384c)),
+                child: Stack(
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 50),
+                          child: Text(
+                            "Today",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        taskList(
+                            'Task 1',
+                            "Description of task 1",
+                            CupertinoIcons.check_mark_circled_solid,
+                            Color(0xff00cf8d)),
+                        taskList('Task 2', "Description of task 2",
+                            CupertinoIcons.clock_solid, Color(0xffff9e00)),
+                        taskList('Task 3', "Description of task 3",
+                            CupertinoIcons.clock_solid, Color(0xffff9e00)),
+                        taskList(
+                            'Task 4',
+                            "Description of task 4",
+                            CupertinoIcons.check_mark_circled_solid,
+                            Color(0xff00cf8d)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class ComponenteCalendario extends StatefulWidget {
   @override
